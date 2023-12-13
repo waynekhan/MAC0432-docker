@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+
+  sonarqube:
+    container_name: sonarqube-10-3-0-enterprise
+    image: sonarqube:10.3.0-enterprise
+    ports:
+      - 9000
+    network_mode: "host"
+    environment:
+      SONAR_JDBC_URL: jdbc:postgresql://localhost:5432/sonar
+      SONAR_JDBC_USERNAME: sonar
+      SONAR_JDBC_PASSWORD: sonar
+    volumes:
+      - app_data:/opt/sonarqube/data
+      - app_extensions:/opt/sonarqube/extensions
+      - app_logs:/opt/sonarqube/logs
+
+volumes:
+  app_data:
+  app_extensions:
+  app_logs:
