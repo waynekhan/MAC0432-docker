@@ -29,6 +29,10 @@ cd $HOME/src/github.com/waynekhan/wordpress-export-emitter && \
 ### Scanning via the Docker image
 
 ```text
+# Get the internal IP of the VM
+k get no -ojson | jq -r '.items[].status.addresses[]'
+
+# Address the instance
 docker run \
   --rm \
   -e SONAR_HOST_URL="http://192.168.5.15:9000" \
