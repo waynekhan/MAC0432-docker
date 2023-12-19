@@ -9,4 +9,4 @@ sudo sysctl -w vm.max_map_count=524288
 sudo sysctl -w fs.file-max=131072
 ```
 
-Therefter, navigating into `postgres` and `sonarqube-99-lts-de` and running `docker-compose up` should work.
+Therefter, navigating into the folders and running `docker-compose up` should work.
