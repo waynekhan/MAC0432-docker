@@ -2,8 +2,9 @@ version: "3.8"
 services:
 
   sonarqube:
-    container_name: sonarqube-9-9-3-developer
+    container_name: sonarqube
     image: sonarqube:9.9.3-developer
+    # image: sonarqube:10.3.0-enterprise
     ports:
       - 9000
     network_mode: "host"
