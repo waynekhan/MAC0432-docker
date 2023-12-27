@@ -6,13 +6,13 @@ services:
     image: postgres:15
     ports:
       - 5432
-    network_mode: "host"
+    network_mode: host
     environment:
       POSTGRES_USER: sonar
       POSTGRES_PASSWORD: sonar
     volumes:
-      - "app:/var/lib/postgresql"
-      - "app_data:/var/lib/postgresql/data"
+      - app:/var/lib/postgresql
+      - app_data:/var/lib/postgresql/data
 
 volumes:
   app:
