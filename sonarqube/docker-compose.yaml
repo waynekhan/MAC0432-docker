@@ -3,8 +3,8 @@ services:
 
   sonarqube:
     container_name: sonarqube
-    image: sonarqube:9.9.3-enterprise
-    # image: sonarqube:10.3.0-enterprise
+    # image: sonarqube:9.9.4-enterprise
+    image: sonarqube:10.4.0-enterprise
     ports:
       - 9000
     network_mode: host
