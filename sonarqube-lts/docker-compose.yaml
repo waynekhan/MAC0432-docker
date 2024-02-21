@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  
+  postgres-lts:
+    container_name: postgres-lts
+    image: postgres:15
+    network_mode: host
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+    volumes:
+    - var-lib-postgresql:/var/lib/postgresql
+    - var-lib-postgresql-data:/var/lib/postgresql/data
+
+  sonarqube-lts:
+    container_name: sonarqube-lts
+    depends_on:
+    - postgres-lts
+    image: sonarqube:9.9.4-enterprise
+    network_mode: host
+    environment:
+      SONAR_JDBC_URL: jdbc:postgresql://localhost:5432/sonar
+      SONAR_JDBC_USERNAME: sonar
+      SONAR_JDBC_PASSWORD: sonar
+    volumes:
+    - opt-sonarqube-data:/opt/sonarqube/data
+    - opt-sonarqube-extensions:/opt/sonarqube/extensions
+    - opt-sonarqube-logs:/opt/sonarqube/logs
+
+volumes:
+  var-lib-postgresql:
+  var-lib-postgresql-data:
+  opt-sonarqube-data:
+  opt-sonarqube-extensions:
+  opt-sonarqube-logs:
