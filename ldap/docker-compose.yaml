@@ -1,20 +1,24 @@
+---
 version: "3.8"
 services:
   openldap:
     container_name: openldap
     image: osixia/openldap:latest
     ports:
-    - 389
-    - 636
+      - 6389:389
+      - 6636:636
     environment:
-    - LDAP_DOMAIN=waynekhan.net  # cn=admin,dc=waynekhan,dc=net
-    - LDAP_ADMIN_PASSWORD=openldap
+      # cn=admin,dc=waynekhan,dc=net
+      - LDAP_DOMAIN=waynekhan.net
+      - LDAP_ADMIN_PASSWORD=openldap
+
   phpldapadmin:
     depends_on:
-    - openldap
+      - openldap
     container_name: phpldapadmin
     image: osixia/phpldapadmin:latest
     ports:
-    - 6443:443  # https://localhost:6443
+      # https://localhost:6443
+      - 6443:443/tcp
     environment:
-    - PHPLDAPADMIN_LDAP_HOSTS=openldap
+      - PHPLDAPADMIN_LDAP_HOSTS=openldap
