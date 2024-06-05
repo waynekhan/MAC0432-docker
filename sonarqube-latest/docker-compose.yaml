@@ -9,7 +9,6 @@ services:
     stop_grace_period: 3600s
     ports:
       - 9000/tcp
-      - 9001/tcp
     environment:
       - SONAR_JDBC_URL=jdbc:postgresql://sonarqube-latest-postgres:5432/sonar
       - SONAR_JDBC_USERNAME=sonar
@@ -21,8 +20,6 @@ services:
       - opt-sonarqube-data:/opt/sonarqube/data
       - opt-sonarqube-extensions:/opt/sonarqube/extensions
       - opt-sonarqube-logs:/opt/sonarqube/logs
-
-  # FIXME: Proxy traffic connecting on port 9011 to sonarqube-latest:9001
 
   sonarqube-latest-nginx:
     container_name: sonarqube-latest-nginx
