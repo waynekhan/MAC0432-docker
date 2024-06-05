@@ -1,36 +1,70 @@
 ---
 version: "3.8"
 services:
-  postgres-latest:
-    container_name: postgres-latest
-    image: postgres:16
-    ports:
-      - 9012:5432/tcp
-    environment:
-      - POSTGRES_USER=sonar
-      - POSTGRES_PASSWORD=sonar
-    volumes:
-      - var-lib-postgresql:/var/lib/postgresql
-      - var-lib-postgresql-data:/var/lib/postgresql/data
-
   sonarqube-latest:
     container_name: sonarqube-latest
     depends_on:
-      - postgres-latest
+      - sonarqube-latest-postgres
     image: sonarqube:10.5.1-enterprise
     stop_grace_period: 3600s
     ports:
-      - 9010:9000/tcp
-      - 9011:9001/tcp
+      - 9000/tcp
+      - 9001/tcp
     environment:
-      - SONAR_JDBC_URL=jdbc:postgresql://postgres-latest:5432/sonar
+      - SONAR_JDBC_URL=jdbc:postgresql://sonarqube-latest-postgres:5432/sonar
       - SONAR_JDBC_USERNAME=sonar
       - SONAR_JDBC_PASSWORD=sonar
+    networks:
+      - sonarqube-latest-backend
     volumes:
       - ./conf:/opt/sonarqube/conf
       - opt-sonarqube-data:/opt/sonarqube/data
       - opt-sonarqube-extensions:/opt/sonarqube/extensions
       - opt-sonarqube-logs:/opt/sonarqube/logs
+
+  sonarqube-latest-nginx:
+    container_name: sonarqube-latest-nginx
+    depends_on:
+      - sonarqube-latest
+    image: nginx:1.27
+    networks:
+      - sonarqube-latest-backend
+      - sonarqube-latest-frontend
+    ports:
+      - 9010:80/tcp
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+  
+  sonarqube-latest-nginx-stream:
+    container_name: sonarqube-latest-nginx-stream
+    depends_on:
+      - sonarqube-latest-postgres
+    image: nginx:1.27
+    networks:
+      - sonarqube-latest-backend
+      - sonarqube-latest-frontend
+    ports:
+      - 9012:80/tcp
+    volumes:
+      - ./nginx-stream.conf:/etc/nginx/nginx.conf
+
+  sonarqube-latest-postgres:
+    container_name: sonarqube-latest-postgres
+    image: postgres:16
+    ports:
+      - 5432/tcp
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    networks:
+      - sonarqube-latest-backend
+    volumes:
+      - var-lib-postgresql:/var/lib/postgresql
+      - var-lib-postgresql-data:/var/lib/postgresql/data
+
+networks:
+  sonarqube-latest-backend:
+  sonarqube-latest-frontend:
 
 volumes:
   opt-sonarqube-data:
