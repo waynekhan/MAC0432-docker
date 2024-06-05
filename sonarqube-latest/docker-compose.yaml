@@ -22,6 +22,8 @@ services:
       - opt-sonarqube-extensions:/opt/sonarqube/extensions
       - opt-sonarqube-logs:/opt/sonarqube/logs
 
+  # FIXME: Proxy traffic connecting on port 9011 to sonarqube-latest:9001
+
   sonarqube-latest-nginx:
     container_name: sonarqube-latest-nginx
     depends_on:
