@@ -37,7 +37,7 @@ services:
   sonarqube-latest-nginx-stream:
     container_name: sonarqube-latest-nginx-stream
     depends_on:
-      - sonarqube-latest-postgres
+      - sonarqube-latest
     image: nginx:1.27
     networks:
       - sonarqube-latest-backend
@@ -60,6 +60,22 @@ services:
     volumes:
       - var-lib-postgresql:/var/lib/postgresql
       - var-lib-postgresql-data:/var/lib/postgresql/data
+  
+  sonarqube-latest-vmagent:
+    container_name: sonarqube-latest-vmagent
+    depends_on:
+      - sonarqube-latest
+    image: victoriametrics/vmagent:v1.93.15
+    ports:
+      - 8429/tcp
+    networks:
+      - sonarqube-latest-backend
+    volumes:
+      - ./vmagent.yaml:/etc/prometheus/prometheus.yml
+      - vmagentdata:/vmagentdata
+    command:
+      - "--promscrape.config=/etc/prometheus/prometheus.yml"
+      - "--remoteWrite.url=http://host.docker.internal:8428/api/v1/write"
 
 networks:
   sonarqube-latest-backend:
@@ -71,3 +87,4 @@ volumes:
   opt-sonarqube-logs:
   var-lib-postgresql:
   var-lib-postgresql-data:
+  vmagentdata:
