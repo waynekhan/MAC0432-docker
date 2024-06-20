@@ -1,0 +1,25 @@
+---
+version: "3.8"
+services:
+  grafana:
+    container_name: grafana
+    depends_on:
+      - victoriametrics
+    image: grafana/grafana:11.0.0
+    ports:
+      - 3000:3000/tcp
+    volumes:
+      - var-lib-grafana:/var/lib/grafana
+
+  victoriametrics:
+    container_name: victoriametrics
+    image: victoriametrics/victoria-metrics:v1.93.15
+    network_mode: host
+    volumes:
+      - storage:/storage
+    command:
+      - "--storageDataPath=/storage"
+
+volumes:
+  storage:
+  var-lib-grafana:
