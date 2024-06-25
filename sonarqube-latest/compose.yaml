@@ -4,7 +4,7 @@ services:
     container_name: sonarqube-latest
     depends_on:
       - sonarqube-latest-postgres
-    image: sonarqube:10.5.1-enterprise
+    image: sonarqube:10.6.0-enterprise
     stop_grace_period: 3600s
     ports:
       - 9000/tcp
