@@ -30,7 +30,10 @@ services:
       - sonarqube-latest-frontend
     ports:
       - 9010:80/tcp
+      - 9011:443/tcp
     volumes:
+      - ./server.crt:/etc/nginx/ssl/certificate.crt
+      - ./server.key:/etc/nginx/ssl/private.key
       - ./nginx.conf:/etc/nginx/nginx.conf
 
   sonarqube-latest-nginx-stream:
