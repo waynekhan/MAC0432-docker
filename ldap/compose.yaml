@@ -18,6 +18,6 @@ services:
     image: osixia/phpldapadmin:latest
     ports:
       # https://localhost:6443
-      - 6443:443/tcp
+      - 6443:443
     environment:
       - PHPLDAPADMIN_LDAP_HOSTS=openldap

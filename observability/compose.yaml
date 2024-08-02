@@ -6,7 +6,7 @@ services:
       - victoriametrics
     image: grafana/grafana:11.0.0
     ports:
-      - 3000:3000/tcp
+      - 3000:3000
     volumes:
       - var-lib-grafana:/var/lib/grafana
 
