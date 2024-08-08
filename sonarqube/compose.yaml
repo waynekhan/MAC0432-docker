@@ -27,9 +27,22 @@ services:
       - var-lib-postgresql:/var/lib/postgresql
       - var-lib-postgresql-data:/var/lib/postgresql/data
 
+  sonarqube-vmagent:
+    container_name: sonarqube-vmagent
+    depends_on:
+      - sonarqube
+    image: victoriametrics/vmagent:v1.93.15
+    volumes:
+      - ./vmagent.yaml:/etc/prometheus/prometheus.yml
+      - vmagentdata:/vmagentdata
+    command:
+      - "--promscrape.config=/etc/prometheus/prometheus.yml"
+      - "--remoteWrite.url=http://host.docker.internal:8428/api/v1/write"
+
 volumes:
   opt-sonarqube-data:
   opt-sonarqube-extensions:
   opt-sonarqube-logs:
   var-lib-postgresql:
   var-lib-postgresql-data:
+  vmagentdata:
