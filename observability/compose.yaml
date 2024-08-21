@@ -10,6 +10,18 @@ services:
     volumes:
       - var-lib-grafana:/var/lib/grafana
 
+  vmagent:
+    container_name: vmagent
+    depends_on:
+      - victoriametrics
+    image: victoriametrics/vmagent:v1.93.15
+    volumes:
+      - ./vmagent.yaml:/etc/prometheus/prometheus.yml
+      - vmagentdata:/vmagentdata
+    command:
+      - "--promscrape.config=/etc/prometheus/prometheus.yml"
+      - "--remoteWrite.url=http://host.docker.internal:8428/api/v1/write"
+
   victoriametrics:
     container_name: victoriametrics
     image: victoriametrics/victoria-metrics:v1.93.15
@@ -22,3 +34,4 @@ services:
 volumes:
   storage:
   var-lib-grafana:
+  vmagentdata:
