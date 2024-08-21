@@ -1,0 +1,16 @@
+---
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:16
+    network_mode: host
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    volumes:
+      - var-lib-postgresql:/var/lib/postgresql
+      - var-lib-postgresql-data:/var/lib/postgresql/data
+
+volumes:
+  var-lib-postgresql:
+  var-lib-postgresql-data:
