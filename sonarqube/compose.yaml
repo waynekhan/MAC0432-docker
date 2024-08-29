@@ -9,9 +9,9 @@ services:
     ports:
       - 9000:9000
     environment:
-      - SONAR_JDBC_URL=jdbc:postgresql://sonarqube-postgres:5432/sonar
+      - SONAR_JDBC_URL=jdbc:postgresql://sonarqube-postgres:5432/sonarqube
       - SONAR_JDBC_USERNAME=sonar
-      - SONAR_JDBC_PASSWORD=sonar
+      - SONAR_JDBC_PASSWORD=123456
     volumes:
       - opt-sonarqube-data:/opt/sonarqube/data
       - opt-sonarqube-extensions:/opt/sonarqube/extensions
@@ -21,8 +21,9 @@ services:
     container_name: sonarqube-postgres
     image: postgres:16
     environment:
+      - POSTGRES_DB=sonarqube
       - POSTGRES_USER=sonar
-      - POSTGRES_PASSWORD=sonar
+      - POSTGRES_PASSWORD=123456
     volumes:
       - var-lib-postgresql:/var/lib/postgresql
       - var-lib-postgresql-data:/var/lib/postgresql/data
