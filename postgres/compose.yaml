@@ -5,8 +5,9 @@ services:
     image: postgres:16
     network_mode: host
     environment:
+      - POSTGRES_DB=sonarqube
       - POSTGRES_USER=sonar
-      - POSTGRES_PASSWORD=sonar
+      - POSTGRES_PASSWORD=123456
     volumes:
       - var-lib-postgresql:/var/lib/postgresql
       - var-lib-postgresql-data:/var/lib/postgresql/data
