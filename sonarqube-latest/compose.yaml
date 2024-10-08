@@ -13,6 +13,7 @@ services:
     networks:
       - sonarqube-latest-backend
     volumes:
+      - ./cacerts:/opt/java/openjdk/lib/security/cacerts
       - ./conf:/opt/sonarqube/conf
       - opt-sonarqube-data:/opt/sonarqube/data
       - opt-sonarqube-extensions:/opt/sonarqube/extensions
