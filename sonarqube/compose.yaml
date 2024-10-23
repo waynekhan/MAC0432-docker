@@ -4,7 +4,7 @@ services:
     container_name: sonarqube
     depends_on:
       - sonarqube-postgres
-    image: sonarqube:9.9.6-enterprise
+    image: sonarqube:9.9.7-enterprise
     stop_grace_period: 3600s
     ports:
       - 9000:9000
@@ -13,9 +13,11 @@ services:
       - SONAR_JDBC_USERNAME=sonar
       - SONAR_JDBC_PASSWORD=123456
     volumes:
-      - opt-sonarqube-data:/opt/sonarqube/data
-      - opt-sonarqube-extensions:/opt/sonarqube/extensions
-      - opt-sonarqube-logs:/opt/sonarqube/logs
+      - ./cacerts:/opt/java/openjdk/lib/security/cacerts
+      - ./conf:/opt/sonarqube/conf
+      - ./data:/opt/sonarqube/data
+      - ./extensions:/opt/sonarqube/extensions
+      - ./logs:/opt/sonarqube/logs
 
   sonarqube-postgres:
     container_name: sonarqube-postgres
@@ -41,9 +43,6 @@ services:
       - "--remoteWrite.url=http://host.docker.internal:8428/api/v1/write"
 
 volumes:
-  opt-sonarqube-data:
-  opt-sonarqube-extensions:
-  opt-sonarqube-logs:
   var-lib-postgresql:
   var-lib-postgresql-data:
   vmagentdata:
