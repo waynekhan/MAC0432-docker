@@ -16,7 +16,7 @@ services:
     volumes:
       - ./cacerts:/opt/java/openjdk/lib/security/cacerts
       - ./conf:/opt/sonarqube/conf
-      - opt-sonarqube-data:/opt/sonarqube/data
+      - ./data:/opt/sonarqube/data
       - ./extensions:/opt/sonarqube/extensions
       - ./logs:/opt/sonarqube/logs
 
@@ -68,7 +68,6 @@ networks:
   sonarqube-latest-frontend:
 
 volumes:
-  opt-sonarqube-data:
   var-lib-postgresql:
   var-lib-postgresql-data:
   vmagentdata:
