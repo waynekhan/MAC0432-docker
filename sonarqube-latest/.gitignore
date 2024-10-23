@@ -1,3 +1,4 @@
 ca.*
 extensions/plugins/*.jar
+logs/*
 server.*

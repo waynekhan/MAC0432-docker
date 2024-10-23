@@ -10,14 +10,15 @@ services:
       - SONAR_JDBC_URL=jdbc:postgresql://sonarqube-latest-postgres/sonarqube
       - SONAR_JDBC_USERNAME=sonar
       - SONAR_JDBC_PASSWORD=123456
+      - SONAR_WEB_ACCESSLOGS_PATTERN=%h %l %reqAttribute{LOGIN} [%t] '%r' %s %b '%i{Referer}' '%i{User-Agent}' '%reqAttribute{ID}'
     networks:
       - sonarqube-latest-backend
     volumes:
       - ./cacerts:/opt/java/openjdk/lib/security/cacerts
       - ./conf:/opt/sonarqube/conf
-      - ./extensions:/opt/sonarqube/extensions
       - opt-sonarqube-data:/opt/sonarqube/data
-      - opt-sonarqube-logs:/opt/sonarqube/logs
+      - ./extensions:/opt/sonarqube/extensions
+      - ./logs:/opt/sonarqube/logs
 
   sonarqube-latest-nginx:
     container_name: sonarqube-latest-nginx
@@ -69,7 +70,6 @@ networks:
 volumes:
   opt-sonarqube-data:
   opt-sonarqube-extensions:
-  opt-sonarqube-logs:
   var-lib-postgresql:
   var-lib-postgresql-data:
   vmagentdata:
