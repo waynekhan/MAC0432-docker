@@ -69,7 +69,6 @@ networks:
 
 volumes:
   opt-sonarqube-data:
-  opt-sonarqube-extensions:
   var-lib-postgresql:
   var-lib-postgresql-data:
   vmagentdata:
