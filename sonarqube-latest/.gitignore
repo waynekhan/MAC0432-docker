@@ -1,5 +1,5 @@
 ca.key
 data/*
 extensions/plugins/*.jar
-logs/*
+logs/*.*
 server.*
