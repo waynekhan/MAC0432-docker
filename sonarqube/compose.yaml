@@ -8,6 +8,7 @@ services:
     stop_grace_period: 3600s
     ports:
       - 9000:9000
+      - 9001:9001
     environment:
       - SONAR_JDBC_URL=jdbc:postgresql://sonarqube-postgres/sonarqube
       - SONAR_JDBC_USERNAME=sonar
