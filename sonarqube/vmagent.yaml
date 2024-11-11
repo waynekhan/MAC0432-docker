@@ -4,9 +4,8 @@ scrape_configs:
     static_configs:
       - targets: ["sonarqube:9000"]
     metrics_path: "/api/monitoring/metrics"
-    basic_auth:
-      username: ""  # FIXME: Set username
-      password: ""
+    authorization:
+      credentials: '123456'
   - job_name: "sonarqube-vmagent"
     static_configs:
       - targets: ["localhost:8429"]
