@@ -36,12 +36,12 @@ services:
     depends_on:
       - sonarqube
     image: victoriametrics/vmagent:v1.93.15
-    volumes:
-      - ./vmagent.yaml:/etc/prometheus/prometheus.yml
-      - vmagentdata:/vmagentdata
     command:
       - "--promscrape.config=/etc/prometheus/prometheus.yml"
       - "--remoteWrite.url=http://host.docker.internal:8428/api/v1/write"
+    volumes:
+      - ./vmagent.yaml:/etc/prometheus/prometheus.yml
+      - vmagentdata:/vmagentdata
 
 volumes:
   var-lib-postgresql:
