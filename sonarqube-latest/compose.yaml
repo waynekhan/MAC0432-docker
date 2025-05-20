@@ -4,7 +4,7 @@ services:
     container_name: sonarqube-latest
     depends_on:
       - sonarqube-latest-postgres
-    image: sonarqube:10.8.1-enterprise
+    image: sonarqube:2025.2.0-enterprise
     stop_grace_period: 3600s
     environment:
       - SONAR_JDBC_URL=jdbc:postgresql://sonarqube-latest-postgres/sonarqube
