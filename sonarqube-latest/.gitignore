@@ -1,4 +1,4 @@
-ca.key
+ca.*
 data/*
 extensions/plugins/*.jar
 logs/*.*

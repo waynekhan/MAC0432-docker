@@ -25,7 +25,7 @@ Common Name (e.g. server FQDN or YOUR name) []:ca.waynekhan.local
 Email Address []:
 ```
 
-NB: `ca.waynekhan.local` being the FQDN of the CA.
+NB: `ca.waynekhan.local` is the FQDN of my CA, yours will differ.
 
 2. As the server, generate its private key and certificate signing request:
 
@@ -55,7 +55,7 @@ A challenge password []:
 An optional company name []:
 ```
 
-NB: `sonarqube-latest.waynekhan.local` being the FQDN of the server. You must also create a file containing the server's certificate extensions; e.g.,
+NB: `sonarqube-latest.waynekhan.local` is the FQDN of my server, yours will differ. You must also create `server.ext`, containing the server's certificate extensions; e.g.,
 
 ```text
 authorityKeyIdentifier=keyid,issuer
@@ -64,7 +64,7 @@ keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
 subjectAltName = @alt_names
 
 [alt_names]
-DNS.1 = sonarqube-latest.waynekhan.local  # FIXME: Change this if need be
+DNS.1 = sonarqube-latest.waynekhan.local
 ```
 
 3. Back as the CA, sign the server's certificate signing request using its private key, certificate, and the server's certificate extensions:
