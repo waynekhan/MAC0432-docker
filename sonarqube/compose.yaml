@@ -10,7 +10,6 @@ services:
       - SONAR_JDBC_USERNAME=sonar
       - SONAR_JDBC_PASSWORD=123456
     volumes:
-      - ./cacerts:/opt/java/openjdk/lib/security/cacerts
       - ./conf:/opt/sonarqube/conf
       - ./data:/opt/sonarqube/data
       - ./extensions:/opt/sonarqube/extensions
