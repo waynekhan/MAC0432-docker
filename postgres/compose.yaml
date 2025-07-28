@@ -2,16 +2,15 @@
 services:
   postgres:
     container_name: postgres
-    image: postgres:16
+    image: postgres:17
+    restart: always
     network_mode: host
     environment:
       - POSTGRES_DB=sonarqube
       - POSTGRES_USER=sonar
       - POSTGRES_PASSWORD=123456
     volumes:
-      - var-lib-postgresql:/var/lib/postgresql
       - var-lib-postgresql-data:/var/lib/postgresql/data
 
 volumes:
-  var-lib-postgresql:
   var-lib-postgresql-data:
