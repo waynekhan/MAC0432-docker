@@ -2,15 +2,11 @@
 services:
   sonarqube:
     container_name: sonarqube
-    depends_on:
-      - sonarqube-postgres
     image: sonarqube:2025.1.0-enterprise
     stop_grace_period: 3600s
-    ports:
-      - 9000:9000
-      - 9001:9001
+    network_mode: host
     environment:
-      - SONAR_JDBC_URL=jdbc:postgresql://sonarqube-postgres/sonarqube
+      - SONAR_JDBC_URL=jdbc:postgresql://localhost/sonarqube
       - SONAR_JDBC_USERNAME=sonar
       - SONAR_JDBC_PASSWORD=123456
     volumes:
@@ -19,17 +15,6 @@ services:
       - ./data:/opt/sonarqube/data
       - ./extensions:/opt/sonarqube/extensions
       - ./logs:/opt/sonarqube/logs
-
-  sonarqube-postgres:
-    container_name: sonarqube-postgres
-    image: postgres:16
-    environment:
-      - POSTGRES_DB=sonarqube
-      - POSTGRES_USER=sonar
-      - POSTGRES_PASSWORD=123456
-    volumes:
-      - var-lib-postgresql:/var/lib/postgresql
-      - var-lib-postgresql-data:/var/lib/postgresql/data
 
   sonarqube-vmagent:
     container_name: sonarqube-vmagent
@@ -44,6 +29,4 @@ services:
       - vmagentdata:/vmagentdata
 
 volumes:
-  var-lib-postgresql:
-  var-lib-postgresql-data:
   vmagentdata:
