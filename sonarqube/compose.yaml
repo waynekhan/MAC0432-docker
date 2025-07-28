@@ -9,6 +9,7 @@ services:
       - SONAR_JDBC_URL=jdbc:postgresql://localhost/sonarqube
       - SONAR_JDBC_USERNAME=sonar
       - SONAR_JDBC_PASSWORD=123456
+      - SONAR_MULTI_QUALITY_MODE_ENABLED=false
     volumes:
       - ./conf:/opt/sonarqube/conf
       - ./data:/opt/sonarqube/data
