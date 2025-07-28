@@ -2,7 +2,7 @@
 services:
   sonarqube:
     container_name: sonarqube
-    image: sonarqube:2025.1.0-enterprise
+    image: sonarqube:2025.1.3-enterprise
     stop_grace_period: 3600s
     network_mode: host
     environment:
