@@ -5,10 +5,6 @@ services:
     image: sonarqube:2025.1.3-enterprise
     stop_grace_period: 3600s
     network_mode: host
-    environment:
-      - SONAR_JDBC_URL=jdbc:postgresql://localhost/sonarqube
-      - SONAR_JDBC_USERNAME=sonar
-      - SONAR_MULTI_QUALITY_MODE_ENABLED=false
     volumes:
       - ./conf:/opt/sonarqube/conf
       - ./data:/opt/sonarqube/data
