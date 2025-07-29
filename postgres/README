@@ -1,0 +1,11 @@
+# postgres
+
+```text
+docker exec -it postgres psql -U postgres -d postgres
+
+create user sonarqube with password '';
+create database sonarqube with owner sonarqube encoding 'UTF8';
+
+create user "sonarqube-latest" with password '';
+create database "sonarqube-latest" with owner sonarqube encoding 'UTF8';
+```
