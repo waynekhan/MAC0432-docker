@@ -2,19 +2,11 @@
 services:
   sonarqube-latest:
     container_name: sonarqube-latest
-    depends_on:
-      - sonarqube-latest-postgres
-    image: sonarqube:2025.3.0-enterprise
+    image: sonarqube:2025.3.1-enterprise
     stop_grace_period: 3600s
-    environment:
-      - SONAR_JDBC_URL=jdbc:postgresql://sonarqube-latest-postgres/sonarqube
-      - SONAR_JDBC_USERNAME=sonar
-      - SONAR_JDBC_PASSWORD=123456
-      - SONAR_WEB_ACCESSLOGS_PATTERN=%h %l %reqAttribute{LOGIN} [%t] '%r' %s %b '%i{Referer}' '%i{User-Agent}' '%reqAttribute{ID}'
     networks:
       - sonarqube-latest-backend
     volumes:
-      - ./cacerts:/opt/java/openjdk/lib/security/cacerts
       - ./conf:/opt/sonarqube/conf
       - ./data:/opt/sonarqube/data
       - ./extensions:/opt/sonarqube/extensions
@@ -37,19 +29,6 @@ services:
       - ./server.key:/etc/nginx/ssl/private.key
       - ./nginx.conf:/etc/nginx/nginx.conf
 
-  sonarqube-latest-postgres:
-    container_name: sonarqube-latest-postgres
-    image: postgres:16
-    environment:
-      - POSTGRES_DB=sonarqube
-      - POSTGRES_USER=sonar
-      - POSTGRES_PASSWORD=123456
-    networks:
-      - sonarqube-latest-backend
-    volumes:
-      - var-lib-postgresql:/var/lib/postgresql
-      - var-lib-postgresql-data:/var/lib/postgresql/data
-  
   sonarqube-latest-vmagent:
     container_name: sonarqube-latest-vmagent
     depends_on:
@@ -69,6 +48,4 @@ networks:
   sonarqube-latest-frontend:
 
 volumes:
-  var-lib-postgresql:
-  var-lib-postgresql-data:
   vmagentdata:
