@@ -2,7 +2,7 @@
 services:
   sonarqube-latest:
     container_name: sonarqube-latest
-    image: sonarqube:2025.3.1-enterprise
+    image: sonarqube:2025.4.2-enterprise
     stop_grace_period: 3600s
     networks:
       - sonarqube-latest-backend
