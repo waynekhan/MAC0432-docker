@@ -6,8 +6,8 @@ services:
     restart: always
     network_mode: host
     environment:
-      - POSTGRES_DB=sonarqube
-      - POSTGRES_USER=sonar
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123456
     volumes:
       - var-lib-postgresql-data:/var/lib/postgresql/data
