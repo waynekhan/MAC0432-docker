@@ -23,11 +23,27 @@ services:
     ports:
       - 9010:80
       - 9011:443
-      - 9012:81
     volumes:
       - ./server.crt:/etc/nginx/ssl/certificate.crt
       - ./server.key:/etc/nginx/ssl/private.key
       - ./nginx.conf:/etc/nginx/nginx.conf
+  
+  sonarqube-latest-ngrok:
+    container_name: sonarqube-latest-ngrok
+    depends_on:
+      - sonarqube-latest
+    image: ngrok/ngrok:3
+    command:
+      - "start"
+      - "sonarqube"
+      - "--config"
+      - "/etc/ngrok.yml"
+    ports:
+      - 4040:4040
+    volumes:
+      - ./ngrok.yml:/etc/ngrok.yml
+    environment:
+      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
 
   sonarqube-latest-vmagent:
     container_name: sonarqube-latest-vmagent
