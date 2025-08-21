@@ -3,6 +3,7 @@ services:
   openldap:
     container_name: openldap
     image: osixia/openldap:1.5.0  # cn=admin,dc=example,dc=org
+    restart: always
     network_mode: host
 
   phpldapadmin:
