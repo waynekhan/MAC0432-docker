@@ -24,5 +24,4 @@ jobs:
           SONAR_SCANNER_OPTS: -Xmx2G -Dsonar.scanner.skipJreProvisioning=true -Dsonar.verbose=true
         with:
           args: >
-            # -Dsonar.buildString=prefix_$(basename "org/repo")
             -Dsonar.buildString=${{ github.run_id }}
