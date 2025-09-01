@@ -21,4 +21,4 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.verbose=true -Dsonar.buildString=${{ github.event.repository.name }}
+            -Dsonar.verbose=true -Dsonar.buildString=${{ github.run_id }}
