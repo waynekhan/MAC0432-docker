@@ -16,12 +16,14 @@ jobs:
         with:
           fetch-depth: 0
       - name: SonarQubeScan
-        uses: SonarSource/sonarqube-scan-action@v5
+        uses: SonarSource/sonarqube-scan-action@v5.3.0
         env:
           SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
           SONAR_SCANNER_OPTS: -Xmx2G -Dsonar.scanner.skipJreProvisioning=true -Dsonar.verbose=true
+
+          SONARQUBE_KEY: waynekhan_MAC0432-docker
         with:
           args: >
             -Dsonar.buildString=${{ github.run_id }}
